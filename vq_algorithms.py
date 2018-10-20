@@ -9,12 +9,12 @@ import numpy as np
 from scipy.stats import norm
 from scipy import integrate
 
+
 class Lloyd_max(object):
     
     # Initalizing
-    def __init__(self, n, m, x, iterations):
+    def __init__(self, m, x, iterations):
             
-        self.n = n
         self.m = m
         self.x = x
         self.iterations = iterations
@@ -53,12 +53,30 @@ class Lloyd_max(object):
                 self.intervals[q + 1] = (self.centroids[q] + self.centroids[q + 1]) / 2
                     
                 q = q + 1
-                
             
             v = v + 1
         
         # Appending and returning final results
-        return self.centroids, self.intervals   
+        return self.centroids, self.intervals
+
+
+class LBG(object):
+    
+    def __init__(self, dim, x, m):
+        self.x = x
+        self.dim = dim
+        self.m = m
+
+
+    def distortion(self):
+        
+        """ squared error distortion """
+        
+
+
+
+
+
 
 
 
@@ -66,14 +84,3 @@ if __name__ == "__main__":
     
     print("\n\nPlease access this file by using lloyd_max.py file.")
     exit
-
-
-
-        
-
-
-
-
-
-
-
