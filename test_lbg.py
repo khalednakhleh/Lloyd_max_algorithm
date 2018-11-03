@@ -57,30 +57,51 @@ def distance_distortion(x, A):
     return s_1, s_2, s_3, s_4, distortion/x.shape[1]
 
 
-def initalize_codebook(dim, N):
+def initialize_codebook(dim, N):
     return np.random.randint(-2,2, size = (dim,N))  
+
+"""
+
+def recalculate_codebook(A,s_1,s_2,s_3,s_4):
     
+    dim_1 = np.shape(s_1)[0]
+    dim_2 = np.shape(s_2)[0]
+    dim_3 = np.shape(s_3)[0]
+    dim_4 = np.shape(s_4)[0]
+    
+
+ 
+    i = 0
+    A[0][0] == 0 
+    
+    while i < np.shape(s_1)[0]:
+        A[0][0] = A[0][0] = s_1[i][q]
+        i = i + 1
+    
+    A[0][0] = A[0][0] / np.shape(s_1)[0]
+    
+        
+
+    return A    
+"""
+
 def LBG(x, dim, N, e):
     
     D_1 = 10 ** 8
-    A = initalize_codebook(dim, N)
+    A = initialize_codebook(dim, N)
     
     s_1, s_2, s_3, s_4, D_0 = distance_distortion(x, A)
     
     d = (D_1 - D_0) / D_0
-    
-    print(s_4[0][0])
-    print(A)
-    print(A[1])
-    
-    count = 0
+
+
+    count = 1
     #while d > e:
         
+        #recalculate_codebook(A,s_1,s_2,s_3,s_4)
         
-    
-        
-    
-    return s_1, s_2, s_3, s_4, D_0
+
+    return s_1, s_2, s_3, s_4, d
 
 def main():
     
@@ -108,16 +129,35 @@ def main():
  
 ###############################################################    
     
+    A = initialize_codebook(dim, N)
+    #print(A)
+ 
+    #print(A[0][0])
+    
+    s_1, s_2, s_3, s_4, d = LBG(x, dim, N, e)
+    
+    b = 0
+    
+    i = 0
+    while i < (np.shape(s_1)[0]):
+        
+        
+        b = b + s_1[i][0]
+        
+        i = i + 1
+    
+    print(b)    
 
-
-    s_1, s_2, s_3, s_4, distortion = LBG(x, dim, N, e)
-
-    w = np.shape(s_1)[0]
-
+    A[0][0] = b
+    print(A[0][0])
+    print("---------------")
+    print(A)
+    print("---------------")
+    print(s_1)
+    print("---------------")
     print(np.shape(s_1))
-    print(np.shape(s_2))
-    print(np.shape(s_3))
-    print(np.shape(s_4))
+
+
     
 if __name__ == "__main__":
     main()
